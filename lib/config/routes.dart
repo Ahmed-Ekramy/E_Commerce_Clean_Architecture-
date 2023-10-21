@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../core/components.dart';
+import '../core/uitls/components.dart';
 import '../features/login/presentation/pages/login_screen.dart';
 import '../features/sign_up/presentation/pages/sign_up.dart';
 class Routes{

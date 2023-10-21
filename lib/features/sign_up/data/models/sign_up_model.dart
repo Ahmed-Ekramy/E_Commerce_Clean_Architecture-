@@ -1,27 +1,23 @@
-class SignUpModel {
+import 'package:e_commerce3/features/sign_up/domain/entities/sign_up_entity.dart';
+
+class SignUpModel extends SignUpEntity {
   String? message;
-  User? user;
-  String? token;
 
-  SignUpModel({this.message, this.user, this.token});
+  SignUpModel({this.message, super.user, super.token});
 
-  SignUpModel.fromJson(Map<String, dynamic> json) {
-    message = json['message'];
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
-    token = json['token'];
-  }
+  SignUpModel.fromJson(Map<String, dynamic> json)
+      : this(message: json['message'], token: json['token']);
 }
 
-class User {
-  String? name;
-  String? email;
+class User extends UserEntity {
   String? role;
 
-  User({this.name, this.email, this.role});
+  User({super.name, super.email, this.role});
 
-  User.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    email = json['email'];
-    role = json['role'];
-  }
+  User.fromJson(Map<String, dynamic> json)
+      : this(
+          name: json['name'],
+          email: json['email'],
+          role: json['role'],
+        );
 }

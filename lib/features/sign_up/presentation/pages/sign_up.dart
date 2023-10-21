@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/components.dart';
+import '../../../../core/uitls/components.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({super.key});
