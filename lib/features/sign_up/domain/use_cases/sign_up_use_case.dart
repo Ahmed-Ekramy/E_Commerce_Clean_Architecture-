@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:e_commerce3/core/uitls/failures.dart';
-
+import '../../../../core/utils/failures.dart';
 import '../../data/models/user_model.dart';
 import '../entities/sign_up_entity.dart';
 import '../repositories/sign_up_domain_repo.dart';
