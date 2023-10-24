@@ -17,18 +17,21 @@ class SignUpRemoteDto implements SignUpDto{
          "${Constant.baseUrl}${EndPoints.signUp}",data:
      {
         "name":userModel.name ,
+       "phone":userModel.phone,
         "email":userModel.email,
         "password":userModel. password,
-        "rePassword":userModel.rePassword,
-        "phone":userModel.phone
+
       });
+     print(response.data);
      SignUpModel signUpModel=SignUpModel.fromJson(response.data);
-return right(signUpModel) ;
+     print(signUpModel.user);
+return Right(signUpModel) ;
     }catch(e){
+      print(e.toString());
       if (e is DioException) {
-        return left(ServerFailure.fromDiorError(e));
+        return Left(ServerFailure.fromDiorError(e));
       }
-      return left(ServerFailure(e.toString()));
+      return Left(ServerFailure(e.toString()));
     }
   }
 }

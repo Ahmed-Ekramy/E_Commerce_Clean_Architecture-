@@ -37,9 +37,9 @@ class ServerFailure extends Failures {
     } else if (statusCode == 500) {
       return ServerFailure('There is a problem with server, please try later');
     }else if (statusCode == 409) {
-      return ServerFailure('Account Already Exists');
-    } else if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
       return ServerFailure(response['message']);
+    } else if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
+      return ServerFailure(response['errors']['msg']);
     } else {
       return ServerFailure('There was an error , please try again');
     }

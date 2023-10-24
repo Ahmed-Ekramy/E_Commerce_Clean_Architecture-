@@ -1,4 +1,3 @@
-import 'package:e_commerce3/features/sign_up/data/data_sources/sign_up_remot_dto.dart';
 import 'package:e_commerce3/features/sign_up/data/models/user_model.dart';
 import 'package:e_commerce3/features/sign_up/data/repositories/sign_up_data_repo.dart';
 import 'package:e_commerce3/features/sign_up/domain/repositories/sign_up_domain_repo.dart';
@@ -11,7 +10,6 @@ import '../../data/data_sources/sign_up_dto.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
   SignUpDto signUpDto;
-
   SignUpCubit(this.signUpDto) : super(SignUpInitialState());
 
   static SignUpCubit get(context) => BlocProvider.of(context);
@@ -19,16 +17,18 @@ class SignUpCubit extends Cubit<SignUpState> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var phoneController = TextEditingController();
-  var rePasswordController = TextEditingController();
 
   void signUp() async{
     emit(SignUpLoadingState());
     SignUpDomainRepo signUpDomainRepo = SignUpDataRepo(signUpDto);
     SignUpUseCase signUpUseCase = SignUpUseCase(signUpDomainRepo);
     UserModel userModel = UserModel(
-        namController.text, emailController.text, passwordController.text,
-        phoneController.text, rePasswordController.text);
+        namController.text,  phoneController.text,emailController.text, passwordController.text,
+       );
    var result =await signUpUseCase.call(userModel);
-   result.fold((l) => emit(SignUpFailureState(l.message)), (r) => emit(SignUpSuccessState(r)));
+   result.fold((l) {
+     emit(SignUpFailureState(l.message));
+     print(l.toString());
+   }, (r) => emit(SignUpSuccessState(r)));
   }
 }

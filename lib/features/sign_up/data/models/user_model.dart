@@ -1,8 +1,7 @@
 class UserModel{
   String name;
+  String phone;
   String email;
   String password;
-  String rePassword;
-  String phone;
-  UserModel(this.name, this.email, this.password, this.phone,this.rePassword);
+  UserModel(this.name, this.phone, this.email, this.password);
 }
