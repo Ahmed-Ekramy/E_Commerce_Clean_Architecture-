@@ -1,3 +1,5 @@
+import 'package:e_commerce3/features/home_layout/data/data_sources/home_remote_dto.dart';
+import 'package:e_commerce3/features/home_layout/presentation/manager/home_cubit.dart';
 import 'package:e_commerce3/features/login/data/data_sources/login_remote_dto.dart';
 import 'package:e_commerce3/features/login/presentation/manager/login_cubit.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +12,8 @@ import '../features/sign_up/presentation/manager/sign_up_cubit.dart';
 import '../features/sign_up/presentation/pages/sign_up.dart';
 class Routes{
  static const String signUp="signUp";
- static const String login="/";
- static const String layout="layout";
+ static const String login="login";
+ static const String layout="/";
 }
 class AppRoutes{
   static Route onGenerate(RouteSettings routeSettings){
@@ -30,7 +32,9 @@ class AppRoutes{
         },);
         case(Routes.layout):
         return MaterialPageRoute(builder: (context) {
-          return const HomeLayout();
+          return BlocProvider(
+              create: (context) => HomeCubit(HomeRemoteDto()),
+              child: const HomeLayout());
         },);
       default:
         return MaterialPageRoute(builder: (context)=> unDefineRoute());
