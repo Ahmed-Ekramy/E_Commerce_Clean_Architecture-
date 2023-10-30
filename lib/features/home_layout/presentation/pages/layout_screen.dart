@@ -1,10 +1,12 @@
+import 'package:e_commerce3/core/utils/app_color.dart';
+import 'package:e_commerce3/core/utils/app_images.dart';
 import 'package:e_commerce3/features/home_layout/presentation/manager/home_cubit.dart';
 import 'package:e_commerce3/features/home_layout/presentation/manager/home_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeLayout extends StatelessWidget {
-  const HomeLayout({Key? key}) : super(key: key);
+  const HomeLayout({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,21 +23,21 @@ class HomeLayout extends StatelessWidget {
            },
            items:const [
            BottomNavigationBarItem(
-               icon: Icon(Icons.home),
+               icon: Image(image: AssetImage("assets/images/home.png")),
                label: "",
-               backgroundColor: Colors.lightBlue),
+               backgroundColor:AppColors.primary),
            BottomNavigationBarItem(
-               icon: Icon(Icons.category_outlined),
+               icon: Image(image: AssetImage("assets/images/cat.png")),
                label: "",
-               backgroundColor: Colors.lightBlue),
+               backgroundColor: AppColors.primary),
            BottomNavigationBarItem(
-               icon: Icon(Icons.favorite_border),
+              icon: Image(image: AssetImage("assets/images/fav.png")),
                label: "",
-               backgroundColor: Colors.lightBlue),
+               backgroundColor: AppColors.primary),
            BottomNavigationBarItem(
-               icon: Icon(Icons.person),
+               icon:  Image(image: AssetImage("assets/images/prof.png")),
                label: "",
-               backgroundColor: Colors.lightBlue),
+               backgroundColor: AppColors.primary),
            ]
          ),
          body: HomeCubit.get(context).tabs[HomeCubit.get(context).currentIndex],

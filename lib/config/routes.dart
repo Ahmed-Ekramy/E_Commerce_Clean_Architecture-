@@ -33,7 +33,7 @@ class AppRoutes{
         case(Routes.layout):
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
-              create: (context) => HomeCubit(HomeRemoteDto()),
+              create: (context) => HomeCubit(HomeRemoteDto())..cat()..brand(),
               child: const HomeLayout());
         },);
       default:
