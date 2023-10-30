@@ -11,6 +11,7 @@ TextStyle poppins14W400({Color? color})=>GoogleFonts.poppins(
   fontWeight: FontWeight.w400,fontSize: 14.sp,color: color
 );
 TextStyle poppins12W400({Color? color})=>GoogleFonts.poppins(
+    decoration: TextDecoration.lineThrough,
   fontWeight: FontWeight.w400,fontSize: 12.sp,color: color
 );
 TextStyle poppins18W500({Color? color})=>GoogleFonts.poppins(

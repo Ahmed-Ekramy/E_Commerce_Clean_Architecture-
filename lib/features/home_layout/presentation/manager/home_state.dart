@@ -1,6 +1,7 @@
 
 import 'package:e_commerce3/features/home_layout/domain/entities/brand_entity.dart';
 import 'package:e_commerce3/features/home_layout/domain/entities/cat_entity.dart';
+import 'package:e_commerce3/features/home_layout/domain/entities/product_entity.dart';
 
 abstract class HomeState {}
 class HomeInitial extends HomeState {}
@@ -27,4 +28,14 @@ class BrandFailureState extends HomeState {
   String message;
 
   BrandFailureState(this.message);
+}
+class ProductLoadingState extends HomeState {}
+class ProductSuccessState extends HomeState {
+  ProductEntity productEntity;
+  ProductSuccessState(this.productEntity);
+}
+class ProductFailureState extends HomeState {
+  String message;
+
+  ProductFailureState(this.message);
 }

@@ -20,7 +20,9 @@ class HomeTab extends StatelessWidget {
       },
       builder: (context, state) {
         return SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
+             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
                 height: 47.h,
@@ -98,18 +100,9 @@ class HomeTab extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.only(left: 16.h, right: 17.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Categories",
-                      style: poppins18W500(),
-                    ),
-                    Text(
-                      "view all",
-                      style: poppins12W400(),
-                    )
-                  ],
+                child: Text(
+                  "Categories",
+                  style: poppins18W500(),
                 ),
               ),
               SizedBox(
@@ -124,6 +117,21 @@ class HomeTab extends StatelessWidget {
                   children: List.generate(
                       HomeCubit.get(context).categories.length,
                       (index) => catGridViewItem(HomeCubit.get(context).categories[index])),
+                ),
+              ),
+              SizedBox(
+                height: 16.h,
+              ),
+              SizedBox(
+                height: 24.h,
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 16.w),
+                width: double.infinity,
+                child: Text(
+                  "Brands",
+                  textAlign: TextAlign.start,
+                  style: poppins18W500(),
                 ),
               ),
               SizedBox(

@@ -1,5 +1,7 @@
 import 'package:e_commerce3/features/home_layout/data/data_sources/home_dto.dart';
 import 'package:e_commerce3/features/home_layout/data/repositories/home_data_repo.dart';
+import 'package:e_commerce3/features/home_layout/domain/entities/product_entity.dart';
+import 'package:e_commerce3/features/home_layout/domain/use_cases/product_use_case.dart';
 import 'package:e_commerce3/features/home_layout/presentation/pages/tabs/category_tab.dart';
 import 'package:e_commerce3/features/home_layout/presentation/pages/tabs/fav_tab.dart';
 import 'package:e_commerce3/features/home_layout/presentation/pages/tabs/prof_tab.dart';
@@ -32,6 +34,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   List<CatDataEntity> categories = [];
   List<BrandDataEntity> brands = [];
+  List<ProductDataEntity> products = [];
 
   void cat() async {
     emit(CatLoadingState());
@@ -52,6 +55,16 @@ class HomeCubit extends Cubit<HomeState> {
         (r) {
           brands = r.data ?? [];
           emit(BrandSuccessState(r));
+        });
+  }
+  void product() async {
+    HomeDomainRepo homeDomainRepo = HomeDataRepo(homeDto);
+    ProductUseCase productUseCase = ProductUseCase(homeDomainRepo);
+    var result = await productUseCase.call();
+    result.fold((l) => emit(ProductFailureState(l.message)),
+        (r) {
+          products = r.data ?? [];
+          emit(ProductSuccessState(r));
         });
   }
 }

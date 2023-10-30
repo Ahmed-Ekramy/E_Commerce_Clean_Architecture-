@@ -1,5 +1,4 @@
 import 'package:e_commerce3/core/utils/app_color.dart';
-import 'package:e_commerce3/core/utils/app_images.dart';
 import 'package:e_commerce3/features/home_layout/presentation/manager/home_cubit.dart';
 import 'package:e_commerce3/features/home_layout/presentation/manager/home_state.dart';
 import 'package:flutter/material.dart';
