@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'config/routes.dart';
 
 class ECommerce extends StatelessWidget {
-  const ECommerce({super.key});
+  String route;
+   ECommerce(this.route,{super.key});
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(

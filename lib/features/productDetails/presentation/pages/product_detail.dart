@@ -7,7 +7,7 @@ import '../../../../core/utils/app_color.dart';
 class ProductDetail extends StatelessWidget {
   ProductDataEntity productDataEntity;
 
-  ProductDetail(this.productDataEntity);
+  ProductDetail(this.productDataEntity, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +27,14 @@ class ProductDetail extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {},
-              icon: Icon(
+              icon: const Icon(
                 Icons.search,
                 size: 30,
                 color: AppColors.primary,
               )),
           IconButton(
               onPressed: () {},
-              icon: Icon(
+              icon: const Icon(
                 Icons.shopping_cart,
                 size: 30,
                 color: AppColors.primary,
@@ -257,7 +257,7 @@ class ProductDetail extends StatelessWidget {
                         onPressed: () {},
                         child: Row(
                           children: [
-                            Icon(Icons.add_shopping_cart_outlined),
+                            const Icon(Icons.add_shopping_cart_outlined),
                             SizedBox(
                               width: 26.w,
                             ),
