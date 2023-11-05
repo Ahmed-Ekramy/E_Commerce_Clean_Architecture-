@@ -1,4 +1,5 @@
 import 'package:e_commerce3/config/routes.dart';
+import 'package:e_commerce3/core/utils/cache_helper.dart';
 import 'package:e_commerce3/features/login/presentation/manager/login_cubit.dart';
 import 'package:e_commerce3/features/login/presentation/manager/login_state.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class LoginScreen extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
 if(state is SuccessLoginState){
+  CacheHelper.saveData(key: "User", value: state.loginEntity.token);
   Navigator.pushNamed(context, Routes.layout);
 }
       },

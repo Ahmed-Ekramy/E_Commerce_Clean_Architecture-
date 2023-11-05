@@ -4,6 +4,8 @@ import 'package:e_commerce3/features/home_layout/presentation/manager/home_state
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../config/routes.dart';
+
 class HomeLayout extends StatelessWidget {
   const HomeLayout({super.key});
 
@@ -15,6 +17,30 @@ class HomeLayout extends StatelessWidget {
 
      builder: (context, state) {
       return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0 ,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Badge(
+                alignment: Alignment.topCenter,
+                label: Text(
+                  "1"),
+                    // HomeCubit.get(context).numOfItemsInCart.toString()),
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, Routes.cart);
+                    },
+                    icon: const Icon(
+                      Icons.shopping_cart,
+                      size: 30,
+                      color: AppColors.primary,
+                    )),
+              ),
+            )
+          ],
+        ),
          bottomNavigationBar: BottomNavigationBar(
            currentIndex: HomeCubit.get(context).currentIndex,
            onTap: (value) {
