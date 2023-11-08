@@ -56,17 +56,15 @@ class HomeRemoteDto extends HomeDto {
       return Left(ServerFailure(e.toString()));
     }
   }
-
   @override
-  Future<Either<Failures, AddCartModel>> addCart(String productId) async {
-    var userToken = CacheHelper.getData("user");
+  Future<Either<Failures, AddCartModel>> addToCart(String productId) async {
+    var userToken = CacheHelper.getData("User");
     try {
-      var response =await dio.post("${Constant.baseUrl}${EndPoints.cart}",
+      var response = await dio.post(
+          "${Constant.baseUrl}${EndPoints.cart}",
           options: Options(headers: {"token": userToken}),
-          data:{
-        "productId":productId
-          } );
-      AddCartModel addCartModel=AddCartModel.fromJson(response.data);
+          data: {"productId": productId});
+      AddCartModel addCartModel = AddCartModel.fromJson(response.data);
       return Right(addCartModel);
     } catch (e) {
       if (e is DioException) {
@@ -74,5 +72,6 @@ class HomeRemoteDto extends HomeDto {
       }
       return Left(ServerFailure(e.toString()));
     }
-    }
   }
+
+}

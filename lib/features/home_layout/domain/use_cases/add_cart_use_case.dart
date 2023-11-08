@@ -7,6 +7,6 @@ import '../repositories/home_domain_repo.dart';
 class AddCartUseCase{
   HomeDomainRepo homeDomainRepo;
   AddCartUseCase(this.homeDomainRepo);
-  Future<Either<Failures,AddCartEntity>>call()=>homeDomainRepo.addCart();
+  Future<Either<Failures,AddCartEntity>>call(String productId)=>homeDomainRepo.addToCart( productId);
 
 }

@@ -26,8 +26,7 @@ class HomeLayout extends StatelessWidget {
               child: Badge(
                 alignment: Alignment.topCenter,
                 label: Text(
-                  "1"),
-                    // HomeCubit.get(context).numOfItemsInCart.toString()),
+                    HomeCubit.get(context).numOfItemsInCart.toString()),
                 child: IconButton(
                     onPressed: () {
                       Navigator.pushNamed(context, Routes.cart);

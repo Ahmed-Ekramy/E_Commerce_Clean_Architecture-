@@ -10,6 +10,6 @@ abstract class HomeDomainRepo{
   Future<Either<Failures,CategoryEntity>>cat();
   Future<Either<Failures,BrandEntity>>brand();
   Future<Either<Failures,ProductEntity>>product();
-  Future<Either<Failures,AddCartEntity>>addCart();
+  Future<Either<Failures,AddCartEntity>>addToCart(String productId);
   
 }

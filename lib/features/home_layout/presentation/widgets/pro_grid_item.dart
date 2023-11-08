@@ -1,3 +1,4 @@
+import 'package:e_commerce3/features/home_layout/presentation/manager/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -6,7 +7,13 @@ import '../../../../core/utils/app_images.dart';
 import '../../../../core/utils/strings.dart';
 import '../../domain/entities/product_entity.dart';
 
-Widget proGridItem(ProductDataEntity product) {
+class proGridItem  extends StatelessWidget {
+ProductDataEntity product;
+
+proGridItem(this.product, {super.key});
+
+@override
+  Widget build(BuildContext context) {
   return Container(
     width: 191,
     height: 237,
@@ -97,6 +104,7 @@ Widget proGridItem(ProductDataEntity product) {
             children: [
               InkWell(
                 onTap: () {
+                  HomeCubit.get(context).addToCart(product.id??"");
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -111,4 +119,7 @@ Widget proGridItem(ProductDataEntity product) {
       ),
     ),
   );
+  }
 }
+
+

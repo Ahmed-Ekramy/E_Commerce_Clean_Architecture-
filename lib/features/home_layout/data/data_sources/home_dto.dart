@@ -9,5 +9,5 @@ abstract class HomeDto{
   Future<Either<Failures,CategoryModel>>cat();
   Future<Either<Failures,BrandModel>>brand();
   Future<Either<Failures,ProductModel>>product();
-  Future<Either<Failures,AddCartModel>>addCart();
+  Future<Either<Failures,AddCartModel>>addToCart(String productId);
 }

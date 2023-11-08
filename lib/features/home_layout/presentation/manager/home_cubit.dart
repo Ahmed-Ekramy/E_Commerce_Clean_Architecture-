@@ -1,6 +1,7 @@
 import 'package:e_commerce3/features/home_layout/data/data_sources/home_dto.dart';
 import 'package:e_commerce3/features/home_layout/data/repositories/home_data_repo.dart';
 import 'package:e_commerce3/features/home_layout/domain/entities/product_entity.dart';
+import 'package:e_commerce3/features/home_layout/domain/use_cases/add_cart_use_case.dart';
 import 'package:e_commerce3/features/home_layout/domain/use_cases/product_use_case.dart';
 import 'package:e_commerce3/features/home_layout/presentation/pages/tabs/category_tab.dart';
 import 'package:e_commerce3/features/home_layout/presentation/pages/tabs/fav_tab.dart';
@@ -22,7 +23,9 @@ class HomeCubit extends Cubit<HomeState> {
   static HomeCubit get(context)=>BlocProvider.of(context);
   List<Widget>tabs=[const HomeTab(),const CatTab(),const FavTab(),const ProfTab()];
    int currentIndex=0;
-   void changNavBar(int value){
+  int numOfItemsInCart = 0;
+
+  void changNavBar(int value){
      currentIndex=value;
      emit(ChangNavState());
    }
@@ -66,5 +69,16 @@ class HomeCubit extends Cubit<HomeState> {
           products = r.data ?? [];
           emit(ProductSuccessState(r));
         });
+  }
+  void addToCart(String productId)async{
+    emit(AddCartLoadingState());
+    HomeDomainRepo homeDomainRepo = HomeDataRepo(homeDto);
+    AddCartUseCase addCartUseCase=AddCartUseCase(homeDomainRepo);
+    var result= await addCartUseCase.call(productId);
+    result.fold((l) => emit(AddCartFailureState(l.message)), (r) {
+      numOfItemsInCart=r.numOfCartItems??0;
+      emit(AddCartSuccessState(r));
+    });
+
   }
 }

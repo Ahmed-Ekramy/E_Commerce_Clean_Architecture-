@@ -1,3 +1,5 @@
+import 'package:e_commerce3/features/cart/data/data_sources/get_cart_remote_dto.dart';
+import 'package:e_commerce3/features/cart/presentation/manager/get_cart_cubit.dart';
 import 'package:e_commerce3/features/home_layout/data/data_sources/home_remote_dto.dart';
 import 'package:e_commerce3/features/home_layout/domain/entities/product_entity.dart';
 import 'package:e_commerce3/features/home_layout/presentation/manager/home_cubit.dart';
@@ -44,12 +46,13 @@ class AppRoutes{
         case(Routes.productDetail):
         return MaterialPageRoute(builder: (context) {
             ProductDataEntity productDataEntity=routeSettings.arguments as ProductDataEntity;
-
           return  ProductDetail(productDataEntity);
         },);
         case(Routes.cart):
         return MaterialPageRoute(builder: (context) {
-          return  const Cart();
+          return  BlocProvider(
+              create: (context) => GetCartCubit(GetCartRemoteDto())..getCart(),
+              child: const Cart());
         },);
       default:
         return MaterialPageRoute(builder: (context)=> unDefineRoute());
