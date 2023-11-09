@@ -1,6 +1,5 @@
 
 import 'package:e_commerce3/features/cart/data/data_sources/get_cart_dto.dart';
-import 'package:e_commerce3/features/cart/data/models/get_cart_model.dart';
 import 'package:e_commerce3/features/cart/data/repositories/get_cart_data_repo.dart';
 import 'package:e_commerce3/features/cart/domain/use_cases/delete_use_case.dart';
 import 'package:e_commerce3/features/cart/domain/use_cases/get_cart_use_case.dart';

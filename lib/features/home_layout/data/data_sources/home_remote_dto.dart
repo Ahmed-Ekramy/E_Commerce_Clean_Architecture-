@@ -5,8 +5,10 @@ import 'package:e_commerce3/core/utils/constant.dart';
 import 'package:e_commerce3/core/utils/end_points.dart';
 import 'package:e_commerce3/core/utils/failures.dart';
 import 'package:e_commerce3/features/home_layout/data/data_sources/home_dto.dart';
+import 'package:e_commerce3/features/home_layout/data/models/add_fav_model.dart';
 import 'package:e_commerce3/features/home_layout/data/models/brand_model.dart';
 import 'package:e_commerce3/features/home_layout/data/models/cat_model.dart';
+import 'package:e_commerce3/features/home_layout/data/models/get_fav_model.dart';
 import 'package:e_commerce3/features/home_layout/data/models/product_model.dart';
 
 import '../models/add_cart_model.dart';
@@ -32,7 +34,7 @@ class HomeRemoteDto extends HomeDto {
   Future<Either<Failures, CategoryModel>> cat() async {
     try {
       var response =
-          await dio.get("${Constant.baseUrl}${EndPoints.categories}");
+      await dio.get("${Constant.baseUrl}${EndPoints.categories}");
       CategoryModel categoryModel = CategoryModel.fromJson(response.data);
       return Right(categoryModel);
     } catch (e) {
@@ -56,12 +58,12 @@ class HomeRemoteDto extends HomeDto {
       return Left(ServerFailure(e.toString()));
     }
   }
+
   @override
   Future<Either<Failures, AddCartModel>> addToCart(String productId) async {
     var userToken = CacheHelper.getData("User");
     try {
-      var response = await dio.post(
-          "${Constant.baseUrl}${EndPoints.cart}",
+      var response = await dio.post("${Constant.baseUrl}${EndPoints.cart}",
           options: Options(headers: {"token": userToken}),
           data: {"productId": productId});
       AddCartModel addCartModel = AddCartModel.fromJson(response.data);
@@ -74,4 +76,40 @@ class HomeRemoteDto extends HomeDto {
     }
   }
 
+  @override
+  Future<Either<Failures, AddFavModel>> addFav(String productId) async {
+    try {
+      var userToken = CacheHelper.getData("User");
+      var response = await dio.post("${Constant.baseUrl}${EndPoints.wishlist}",
+          data: {"productId": productId},
+          options: Options(
+            headers: {"token": userToken},
+          ));
+      AddFavModel addFavModel = AddFavModel.fromJson(response.data);
+      return Right(addFavModel);
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDiorError(e));
+      }
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failures, GetFavModel>> getFav() async {
+    try{
+      var userToken = CacheHelper.getData("User");
+      var response = await dio.get("${Constant.baseUrl}${EndPoints.wishlist}",
+          options: Options(
+            headers: {"token": userToken},
+          ));
+      GetFavModel getFavModel = GetFavModel.fromJson(response.data);
+      return Right(getFavModel);
+    }catch(e){
+      if (e is DioException) {
+        return Left(ServerFailure.fromDiorError(e));
+      }
+      return Left(ServerFailure(e.toString()));
+    }
+  }
 }

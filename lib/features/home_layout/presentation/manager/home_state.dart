@@ -1,6 +1,8 @@
 import 'package:e_commerce3/features/home_layout/domain/entities/add_cart_entity.dart';
+import 'package:e_commerce3/features/home_layout/domain/entities/add_fav.dart';
 import 'package:e_commerce3/features/home_layout/domain/entities/brand_entity.dart';
 import 'package:e_commerce3/features/home_layout/domain/entities/cat_entity.dart';
+import 'package:e_commerce3/features/home_layout/domain/entities/get_fav_entity.dart';
 import 'package:e_commerce3/features/home_layout/domain/entities/product_entity.dart';
 
 abstract class HomeState {}
@@ -55,13 +57,46 @@ class ProductFailureState extends HomeState {
 }
 
 class AddCartLoadingState extends HomeState {}
+
 class AddCartSuccessState extends HomeState {
   AddCartEntity addCartEntity;
 
   AddCartSuccessState(this.addCartEntity);
 }
+
 class AddCartFailureState extends HomeState {
   String message;
 
   AddCartFailureState(this.message);
+}
+
+class AddFavLoadingState extends HomeState {}
+
+class AddFavSuccessState extends HomeState {
+  AddFavEntity addFavEntity;
+
+  AddFavSuccessState(this.addFavEntity);
+
+}
+
+class AddFavFailureState extends HomeState {
+  String message;
+
+  AddFavFailureState(this.message);
+}
+
+class GetFavLoadingState extends HomeState {}
+
+class GetFavSuccessState extends HomeState {
+  GetFavEntity getFavEntity;
+
+  GetFavSuccessState(this.getFavEntity);
+
+
+}
+
+class GetFavFailureState extends HomeState {
+  String message;
+
+  GetFavFailureState(this.message);
 }

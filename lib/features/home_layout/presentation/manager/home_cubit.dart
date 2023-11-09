@@ -1,7 +1,10 @@
 import 'package:e_commerce3/features/home_layout/data/data_sources/home_dto.dart';
 import 'package:e_commerce3/features/home_layout/data/repositories/home_data_repo.dart';
+import 'package:e_commerce3/features/home_layout/domain/entities/get_fav_entity.dart';
 import 'package:e_commerce3/features/home_layout/domain/entities/product_entity.dart';
 import 'package:e_commerce3/features/home_layout/domain/use_cases/add_cart_use_case.dart';
+import 'package:e_commerce3/features/home_layout/domain/use_cases/add_fav_use_case.dart';
+import 'package:e_commerce3/features/home_layout/domain/use_cases/get_fav_use_case.dart';
 import 'package:e_commerce3/features/home_layout/domain/use_cases/product_use_case.dart';
 import 'package:e_commerce3/features/home_layout/presentation/pages/tabs/category_tab.dart';
 import 'package:e_commerce3/features/home_layout/presentation/pages/tabs/fav_tab.dart';
@@ -34,11 +37,10 @@ class HomeCubit extends Cubit<HomeState> {
     AppImages.sliderTwo,
     AppImages.sliderThree
   ];
-
   List<CatDataEntity> categories = [];
   List<BrandDataEntity> brands = [];
   List<ProductDataEntity> products = [];
-
+  List<DataGetFav> favList = [];
   void cat() async {
     emit(CatLoadingState());
     HomeDomainRepo homeDomainRepo = HomeDataRepo(homeDto);
@@ -78,6 +80,29 @@ class HomeCubit extends Cubit<HomeState> {
     result.fold((l) => emit(AddCartFailureState(l.message)), (r) {
       numOfItemsInCart=r.numOfCartItems??0;
       emit(AddCartSuccessState(r));
+    });
+
+  }
+  void addFav(String productId)async{
+    emit(AddFavLoadingState());
+    HomeDomainRepo homeDomainRepo = HomeDataRepo(homeDto);
+    AddFavUseCase addFavUseCase=AddFavUseCase(homeDomainRepo);
+    var result= await addFavUseCase.addFav(productId);
+    result.fold((l) => emit(AddFavFailureState(l.message)), (r) {
+      emit(AddFavSuccessState(r));
+    });
+
+  }
+  void getFav()async{
+    emit(GetFavLoadingState());
+    HomeDomainRepo homeDomainRepo = HomeDataRepo(homeDto);
+    GetFavUseCase getFavUseCase=GetFavUseCase(homeDomainRepo);
+    var result= await getFavUseCase.call();
+    result.fold((l) {
+      emit(GetFavFailureState(l.message));
+    }, (r) {
+      favList=r.data??[];
+      emit(GetFavSuccessState(r));
     });
 
   }

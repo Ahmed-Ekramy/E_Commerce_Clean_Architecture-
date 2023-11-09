@@ -40,7 +40,7 @@ class AppRoutes{
         case(Routes.layout):
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
-              create: (context) => HomeCubit(HomeRemoteDto())..cat()..brand()..product(),
+              create: (context) => HomeCubit(HomeRemoteDto())..cat()..brand()..product()..getFav(),
               child: const HomeLayout());
         },);
         case(Routes.productDetail):

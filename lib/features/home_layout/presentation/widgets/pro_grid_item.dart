@@ -43,6 +43,7 @@ proGridItem(this.product, {super.key});
                   bottom: 90,
                   child: InkWell(
                       onTap: () {
+                        HomeCubit.get(context).addFav(product.id??"");
                       },
                       child: Image.asset(AppImages.fav))),
             ],

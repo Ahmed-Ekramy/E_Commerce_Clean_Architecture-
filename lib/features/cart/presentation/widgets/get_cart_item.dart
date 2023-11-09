@@ -64,7 +64,7 @@ class GetCartItem extends StatelessWidget {
                         onPressed: () {
                           GetCartCubit.get(context).delCart(product.product?.id??"");
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.delete,
                           size: 30,
                         ))
